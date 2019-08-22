@@ -1,60 +1,38 @@
 var connection = require("../config/connection.js");
 
-var orm= {
- selectAll: function(whatToSelect, tableInput){
-    var queryString = "SELECT ?? FROM ??";
-    connection.query(queryString, [whatToSelect, tableInput], function(err, result) {
-      if (err) throw err;
-      console.log(result);
+var orm = {
+    selectAll: function(table, callback) {
+        var queryString = "SELECT * FROM ??;";
+        connection.query(queryString, [table], function(err, res) {
+            if (err) throw err;
+            callback(res);
+        });
+    },
+   
+    insertOne: function(gryffindor, hufflepuff, ravenclaw, callback) {
+    var queryString = "INSERT INTO ?? (??) VALUES (?);"
+        connection.query(queryString, [gryffindor, hufflepuff, ravenclaw], function(err, slytherin){
+            if (err) throw err;
+        callback(slytherin);
     });
-   },
-    insertOne: function( table, cols, vals, cb){
-    var queryString= "INSERT INTO " + table;
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
+    },
+    updateOne: function(colVal, id, callback) {
+    var queryString = "UPDATE burgers SET devoured='1' WHERE " + id + ";";
+        connection.query(queryString, [id], function(err, result) {
+      
+            if (err) throw err;
+      
+        callback(result);
+        });
+    },
 
-    console.log(queryString);
-
-    connection.query(queryString, vals, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
-    });
-
-   },
-    update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
-
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
-
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
-    });
-  },
+    deleteOne: function(id, callback) {
+        var queryString = "DELETE FROM burgers WHERE " + id + ";";
+        connection.query(queryString, [id], function(err, res) {
+         if (err) throw err;
+         callback(res);
+        });
+    },
 }
-
-
-
-
-
-
-
-
-
-
-
+//Exports ORM
 module.exports = orm;
