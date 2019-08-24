@@ -4,36 +4,33 @@ var router = express.Router();
 var burger = require("../models/burger.js")
 
 router.get("/", function (req, res) {
-  burger.selectAll(function (data) {
-                     
+  burger.selectAll(function (data) {               
       var burgerBurger = {
           burgers: data
       };
-      res.render("index", burgerBurger);
+        res.render("index", burgerBurger);
   });
 });
 router.post("/insertOne", function (req, res) {
-   
   burger.insertOne(req.body.burger_name, function (cheese) {
-      res.redirect("/")
+   res.redirect("/")
   });
 });
 
 router.post("/updateOne/:id", function (req, res) {
- 
   var condition = "id = " + req.params.id;
   burger.updateOne({
-     
       devoured: req.body.devoured
   }, condition, function () {                         
-      res.redirect("/");
+  
+    res.redirect("/");
   });
 });
 
 router.post("/deleteOne/:id", function (req, res) {
   var condition = "id = " + req.params.id;              
   burger.deleteOne(condition, function () {
-      res.redirect("/");
+          res.redirect("/");
   });
 });
 
