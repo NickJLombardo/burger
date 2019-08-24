@@ -1,38 +1,57 @@
-<h1>Burgers</h1>
 
+ <h1>Eat The Burger</h1>
+        <div>
+        <div>
+            <h3 >Add Burgers</h3>
+            <div>
+                <form class="create-update-form" action="/insertOne" method="POST">
+                    <div class="form-group">
+                        <textarea type="text" name="burger_name"></textarea><br>
+                        <button class="btn btn-warning" type="submit" style="background-color:beige;">Add The Burger </button>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 burgers">
+            <h3 ">Burgers! </h3>
+            <br>
+            <ul>
+                {{#each burgers}}
+                {{#unless this.devoured}}
+                <div class="showBurger">
+                    <p>
+                        {{this.burger_name}}</p>
+                    <form action="/updateOne/{{this.id}}" method="POST">
+                        <input type="hidden" name="devoured" value="1">
+                        <button type="submit" class="btn" style="background-color:purple ;">Eat The Burger</button>
+                    </form>
+                    <br>
+                </div>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+        <div>
+<h3>Burgers Eaten</h3>
+  <br>
+   <ul>
+      {{#each burgers}}
+     {{#if this.devoured}}
+   <div class="devourBurger">
+      <p>
+      {{this.burger_name}}</p>
+      <form action="/deleteOne/{{this.id}}" method="POST">
+     <button type="submit" class="btn"
+      style="background-color: purple ;">Delete The Burger </button>
+      </form>
+       {{/if}}
+        {{/each}}
+           </ul>
+    </div>
+ </div>
+</div>
+<hr>
 
-
-<ul>
-  {{#each burger}}
-    {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-
-
-<ul>
-  {{#each Burgers}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a topping</h2>
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="ca">Burger type:</label>
-    <input type="text" id="ca" name="name">
-  </div>
-
-  <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
-  </div>
-
-  <button type="submit">Add burger</button>
-</form>
+</div>

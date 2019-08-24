@@ -9,9 +9,9 @@ var orm = {
         });
     },
    
-    insertOne: function(gryffindor, hufflepuff, ravenclaw, callback) {
+    insertOne: function(burgs, huff, claw, callback) {
     var queryString = "INSERT INTO ?? (??) VALUES (?);"
-        connection.query(queryString, [gryffindor, hufflepuff, ravenclaw], function(err, slytherin){
+        connection.query(queryString, [burgs, huff, claw], function(err, slytherin){
             if (err) throw err;
         callback(slytherin);
     });
