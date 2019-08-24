@@ -16,23 +16,22 @@
     <div class="row">
         <div class="col-6 burgers">
             <h3 ">Burgers! </h3>
-            <br>
-            <ul>
-                {{#each burgers}}
-                {{#unless this.devoured}}
-                <div class="showBurger">
-                    <p>
-                        {{this.burger_name}}</p>
-                    <form action="/updateOne/{{this.id}}" method="POST">
-                        <input type="hidden" name="devoured" value="1">
-                        <button type="submit" class="btn" style="background-color:purple ;">Eat The Burger</button>
-                    </form>
-                    <br>
-                </div>
-                {{/unless}}
-                {{/each}}
-            </ul>
-        </div>
+   <br>
+   <ul>
+       {{#each burgers}}
+      {{#unless this.devoured}}
+    <div class="showBurger">
+          <p>{{this.burger_name}}</p>
+    <form action="/updateOne/{{this.id}}" method="POST">
+           <input type="hidden" name="devoured" value="1">
+       <button type="submit" class="btn" style="background-color:purple ;">Eat The Burger</button>
+   </form>
+   <br>
+     </div>
+     {{/unless}}
+     {{/each}}
+        </ul>
+    </div>
         <div>
 <h3>Burgers Eaten</h3>
   <br>
